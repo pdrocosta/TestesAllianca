@@ -17,11 +17,13 @@ describe("Teste 1", () => {
   });
 });
 describe("Teste 2", () => {
+  beforeEach(() => {
+    cy.visit("https://www.olx.com.br/"); /// visita url
+    cy.get(".olx-logo-olx").should("be.visible"); /// busca logo para verificar se pagina esta correta
+  });
+  
   it("Faz uma pesquisa invalida, e tira print da tela", () => {
-    beforeEach(() => {
-      cy.visit("https://www.olx.com.br/"); /// visita url
-      cy.get(".olx-logo-olx").should("be.visible"); /// busca logo para verificar se pagina esta correta
-    });
+  
     cy.get("#oraculo-4-input").type("!!!!##&*&%", { enter: true }); /// acha input e escreve procura
     cy.get('button[data-ds-component="Oraculo-Button"]').click(); /// acha botao de pesquisa e clica
 
