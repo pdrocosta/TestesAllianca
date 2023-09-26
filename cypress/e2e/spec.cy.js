@@ -1,10 +1,8 @@
 describe("Teste 1", () => {
-  beforeEach(() => {
-    cy.visit("https://www.olx.com.br/"); /// visita url
-    cy.get(".olx-logo-olx").should("be.visible"); /// busca logo para verificar se pagina esta correta
-  });
-
   it("Faz uma pesquisa valida, e tira print da tela", () => {
+    cy.visit("https://www.olx.com.br/"); /// visita url
+    
+    cy.get(".olx-logo-olx").should("be.visible"); /// busca logo para verificar se pagina esta correta
     cy.get("#oraculo-4-input").type("Audi", { enter: true }); /// acha input e escreve procura
     cy.get('button[data-ds-component="Oraculo-Button"]').click(); /// acha botao de pesquisa e clica
 
@@ -18,13 +16,12 @@ describe("Teste 1", () => {
 });
 describe("Teste 2", () => {
   it("Faz uma pesquisa invalida, e tira print da tela", () => {
-    beforeEach(() => {
-      cy.visit("https://www.olx.com.br/"); /// visita url
-      cy.get(".olx-logo-olx").should("be.visible"); /// busca logo para verificar se pagina esta correta
-    });
+    cy.visit("https://www.olx.com.br/"); /// visita url
+    
+    cy.get(".olx-logo-olx").should("be.visible"); /// busca logo para verificar se pagina esta correta
     cy.get("#oraculo-4-input").type("!!!!##&*&%", { enter: true }); /// acha input e escreve procura
     cy.get('button[data-ds-component="Oraculo-Button"]').click(); /// acha botao de pesquisa e clica
-
+    
     cy.wait(10000);
 
     cy.get("span").contains("Ops! Nenhum anúncio foi encontrado."); /// checa para confirmar que nao houveram resultados
@@ -33,9 +30,6 @@ describe("Teste 2", () => {
 });
 
 describe("Teste 3", () => {
-  beforeEach(() => {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
-  });
 
   const userInfos = {
     nome: "Pedro",
@@ -47,6 +41,8 @@ describe("Teste 3", () => {
   };
 
   it.skip("Preencher formulario, cadastrar, ir para pagina de login e conferir se usuario foi criado corretamente na API", () => {
+    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+    
     cy.get("#nome").type(userInfos.nome); /// busca todos campos do formulario e escreve infomacoes do usuario
     cy.get("#cpf").type(userInfos.cpf);
     cy.get("#nascimento").type(userInfos.nascimento);
@@ -54,6 +50,7 @@ describe("Teste 3", () => {
     cy.get("#email").type(userInfos.email);
     cy.get("#senha").type(userInfos.senha);
     cy.get("#confirmarSenha").type(userInfos.senha);
+    
     cy.get('button[type="submit"]').click();
 
     cy.url().should("eq", "https://www.CartaoAlianca.com.br/login"); // checa se foi redirecionado a pagina de login
@@ -89,6 +86,7 @@ describe("Teste 4", () => {
   ];
 
   it.skip("Testar funcionalidade dos botões", () => {
+    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
     buttons.forEach((buttonText) => {
       /// atraves da lista dos botoes, busca cada um, clica, tira print e retorna para o proximo teste.
       cy.get("button").contains(buttonText).click();
