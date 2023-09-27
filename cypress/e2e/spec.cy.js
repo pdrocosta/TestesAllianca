@@ -4,26 +4,26 @@ import OlxHomePage from "../pages/olxHomePage";
 /// Caso 1 e 2 ->
 
 describe("Verificar funcionalidade de pesquisa da OLX", () => {
+  const olx = new OlxHomePage();
+
   beforeEach(() => {
-    cy.visit("https://www.olx.com.br");
+    olx.navigate();
     cy.get("#cookie-notice-ok-button").click();
   });
 
   it("Faz uma pesquisa valida, e tira print da tela", () => {
-    const olx = new OlxHomePage();
-
     olx.procurarTextoNaSearchBox("teclado gamer");
 
-    cy.get('a[data-ds-component="DS-NewAdCard-Link"]')
-      .should("have.attr", "href")
-      .and("include", "teclado");
+    cy.get('a[data-ds-component="DS-NewAdCard-Link"]').should(
+      "have.attr",
+      "href"
+    );
+    //.and("include", "teclado");
 
     cy.screenshot();
   });
 
   it("Faz uma pesquisa invalida, e tira print da tela", () => {
-    const olx = new OlxHomePage();
-
     olx.procurarTextoNaSearchBox("!!!!##&*&%");
 
     cy.get("span").contains("Ops! Nenhum anúncio foi encontrado.");
@@ -36,27 +36,38 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
 
 /// lista de outros exemplos de teste para este caso estao no txt desta pasta -> ./e2e/caso3.txt
 describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", () => {
-  const userInfos = {
-    nome: "Pedro",
-    cpf: "12345678900",
-    nascimento: "12345678",
-    telefone: "44934567890",
-    email: "pedro@mail.com",
-    senha: "123456789",
-  };
+  beforeEach(() => {
+    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+  });
+
+  const buttons = [
+    "Início",
+    "Rede de Parceiros",
+    "Fale Conosco",
+    "Quero ser Parceiro",
+    "Nossos Produtos",
+    "Entrar",
+    "Quero meu Cartão",
+    "Trocar Plano",
+    "Endereco",
+    "Pagamento",
+    "Acesso ao Plano",
+  ];
 
   it.skip("Preenche formulario, cadastra, vai para pagina de login e confere se usuario foi criado corretamente na API", () => {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+    cy.fixture("userInfos.json").then((userInfos) => {
+      Object.keys(userInfos).forEach((key) => {
+        cy.get(`#${key}`).type(userInfos[key]);
+      });
 
-    cy.get("#nome").type(userInfos.nome);
-    cy.get("#cpf").type(userInfos.cpf);
-    cy.get("#nascimento").type(userInfos.nascimento);
-    cy.get("#telefone").type(userInfos.telefone);
-    cy.get("#email").type(userInfos.email);
-    cy.get("#senha").type(userInfos.senha);
-    cy.get("#confirmarSenha").type(userInfos.senha);
+      cy.get("#confirmarSenha").type(userInfos.senha);
+    });
 
     cy.get('button[type="submit"]').click();
+
+    cy.get("#alerta-sucesso")
+      .should("be.visible")
+      .should("contain.text", "Cadastro realizado!");
 
     cy.url().should("eq", "https://www.CartaoAlianca.com.br/login");
 
@@ -71,27 +82,11 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
     });
   });
 
-  const buttons = [
-    "Logo",
-    "Início",
-    "Rede de Parceiros",
-    "Fale Conosco",
-    "Quero ser Parceiro",
-    "Nossos Produtos",
-    "Entrar",
-    "Quero meu Cartão",
-    "Trocar Plano",
-    "Endereco",
-    "Pagamento",
-    "Acesso ao Plano",
-  ];
-
   it.skip("Testar funcionalidade dos botões", () => {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
-
     buttons.forEach((buttonText) => {
       cy.get("button").contains(buttonText).click();
-      cy.screenshot();
+      const urlText = buttonText.replace(/\s+/g, "");
+      cy.url().should("eq", `https://www.CartaoAlianca.com.br/${urlText}`);
       cy.go("back");
     });
   });
@@ -100,13 +95,13 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
 /// Caso 1 e 2 v2 ->
 
 describe("Teste 1 e 2 v2", () => {
+  const google = new GoogleSearchPage();
+
   beforeEach(() => {
-    cy.visit("https://www.google.com");
+    google.navigate();
   });
 
   it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
-    const google = new GoogleSearchPage();
-
     google.procurarTextoNaSearchBox("teclado");
 
     cy.get("body").should("contain", "teclado");
@@ -115,8 +110,6 @@ describe("Teste 1 e 2 v2", () => {
   });
 
   it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
-    const google = new GoogleSearchPage();
-
     google.procurarTextoNaSearchBox("@%&^&*#@51fgsdfg");
 
     cy.get("div").should(

@@ -19,3 +19,5 @@
  e preencher restante com mocks, clicar em cadastro. caso redirecionado para pagina de login, estourar erro. 
  checar na base de dados se existem dois ou mais usuarios com mesmo cpf ou email. caso houver, retorna-los. 
  caso estoure erro na pagina de cadastro, sucesso. caso nao seja redirecionado para login, porem nao tenha erros, estourar erro no teste.
+
+4 -> Testar seguranca do front end, decodificando senha. 
