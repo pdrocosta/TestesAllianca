@@ -8,26 +8,18 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
 
   beforeEach(() => {
     olx.navigate();
-    cy.get("#cookie-notice-ok-button").click();
+    olx.aceitarCookies();
   });
 
   it("Faz uma pesquisa valida, e tira print da tela", () => {
     olx.procurarTextoNaSearchBox("teclado gamer");
-
-    cy.get('a[data-ds-component="DS-NewAdCard-Link"]').should(
-      "have.attr",
-      "href"
-    );
-    //.and("include", "teclado");
-
+    olx.encontrarPesquisaValida("teclado gamer");
     cy.screenshot();
   });
 
   it("Faz uma pesquisa invalida, e tira print da tela", () => {
     olx.procurarTextoNaSearchBox("!!!!##&*&%");
-
-    cy.get("span").contains("Ops! Nenhum anúncio foi encontrado.");
-
+    olx.encontrarErroDePesquisa();
     cy.screenshot();
   });
 });
@@ -103,19 +95,13 @@ describe("Teste 1 e 2 v2", () => {
 
   it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
     google.procurarTextoNaSearchBox("teclado");
-
-    cy.get("body").should("contain", "teclado");
-
+    google.encontrarPesquisa("teclado");
     cy.screenshot();
   });
 
   it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
     google.procurarTextoNaSearchBox("@%&^&*#@51fgsdfg");
-
-    cy.get("div").should(
-      "contain",
-      "Sua pesquisa não encontrou nenhum documento correspondente"
-    );
+    google.encontrarErroDePesquisa();
 
     cy.screenshot();
   });
