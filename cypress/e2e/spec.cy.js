@@ -25,7 +25,7 @@ describe("Teste 2", () => {
     cy.wait(10000);
 
     cy.get("span").contains("Ops! Nenhum anúncio foi encontrado."); /// checa para confirmar que nao houveram resultados
-    cy.screenshot();
+    cy.screenshot(); /// printar sem scroll, buscar apenas um resultado e continuar
   });
 });
 
@@ -95,10 +95,19 @@ describe("Teste 4", () => {
     });
   });
 });
+
+
 /// anotar possiveis testes
 
 /// 1-> testar se formulario pode ser cadastrado com informacoes a menos
-/// 2 -> testar se informacoes se mantem quando pagina eh recarregada
+
+//// preencher informacoes incorretas e incompletas  e tentar fazer o envio. atraves de diferenres objeros com respectivas informacoes.  checar se ha algum aviso de eero, ou se a pagina foi redirecionada para o login.  caso seja redirecionado, checar na api se usuario foi cadastrado. se cadastrado retornar user. 
+
+/// 2 -> testar se informacoes se mantem quando pagina eh recarregada 
 /// 3 -> testar se senha eh mantida ou nao quando pagina eh recarregada
-/// 4-> testar responsividade do frontend com diferentes dispositivos
-/// 5 -> 
+/// testes 2 e 3 podem ser feitos juntos. 
+/// preencher informacoes com mock, incluindo senhas. recarregar pagina, percorrer inputs e checar se informacoes dentro dos campos sao as mesas que as inputadas iniciqlmente, caso a senha esteja informada, estourar erro. caso outras informacoes nao estejam, estorar erro
+
+/// 4 -> testar se email e cpf ja cadastradoa podem ser usados pra criar novo usuario 
+/// buscar na base de dados usuario mock ja registrado. inserir informacoes de cpf e email  buscados, e preencher restante com mocks, clicar em cadastro. caso redirecionado para pagina de login, estourar erro. checar na base de dados se existem dois usuarios com mesmo cpf ou email. caso houver, retornalos. caso estoure erro na pagina de cadastro, sucesso. caso nao seja redirecionado para login, porem nao tenha erros, estourar erro no teste. 
+
