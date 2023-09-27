@@ -28,8 +28,10 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
 
 /// lista de outros exemplos de teste para este caso estao no txt desta pasta -> ./e2e/caso3.txt
 describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", () => {
+  const cartaoAllianca = new CartaoAlliancaRegisterPage();
+
   beforeEach(() => {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+    cartaoAlliancaRegisterPage.navigate();
   });
 
   const buttons = [
@@ -47,38 +49,16 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
   ];
 
   it.skip("Preenche formulario, cadastra, vai para pagina de login e confere se usuario foi criado corretamente na API", () => {
-    cy.fixture("userInfos.json").then((userInfos) => {
-      Object.keys(userInfos).forEach((key) => {
-        cy.get(`#${key}`).type(userInfos[key]);
-      });
-
-      cy.get("#confirmarSenha").type(userInfos.senha);
-    });
-
-    cy.get('button[type="submit"]').click();
-
-    cy.get("#alerta-sucesso")
-      .should("be.visible")
-      .should("contain.text", "Cadastro realizado!");
-
-    cy.url().should("eq", "https://www.CartaoAlianca.com.br/login");
-
-    cy.request("GET", "/api/users").then((response) => {
-      const users = response.body;
-      const user = users.find((u) => u.cpf === userInfos.cpf);
-
-      expect(user.nascimento).to.equal(userInfos.nascimento);
-      expect(user.telefone).to.equal(userInfos.telefone);
-      expect(user.email).to.equal(userInfos.nome);
-      expect(user.senha).to.equal(userInfos.senha);
-    });
+    cartaoAlliancaRegisterPage.preencherFormulario();
+    cartaoAlliancaRegisterPage.submitForm();
+    cartaoAlliancaRegisterPage.confirmarUrl("login");
+    cartaoAlliancaRegisterPage.checarRegistroBackEnd();
   });
 
   it.skip("Testar funcionalidade dos botões", () => {
     buttons.forEach((buttonText) => {
-      cy.get("button").contains(buttonText).click();
-      const urlText = buttonText.replace(/\s+/g, "");
-      cy.url().should("eq", `https://www.CartaoAlianca.com.br/${urlText}`);
+      cartaoAlliancaRegisterPage.clicarBotaoDeRedirecionamento(buttonText);
+      cartaoAlliancaRegisterPage.checarUrlRedirecionada(buttonText);
       cy.go("back");
     });
   });

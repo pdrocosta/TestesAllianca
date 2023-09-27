@@ -1,6 +1,6 @@
 class OlxHomePage {
   navigate() {
-    cy.visit("https://www.olx.com.br");
+    return cy.visit("https://www.olx.com.br");
   }
 
   procurarTextoNaSearchBox(text) {
@@ -10,17 +10,18 @@ class OlxHomePage {
   }
 
   aceitarCookies() {
-    cy.get("#cookie-notice-ok-button").click();
+    return cy.get("#cookie-notice-ok-button").click();
+    
   }
 
   encontrarPesquisaValida(pesquisa) {
-    cy.get('a[data-ds-component="DS-NewAdCard-Link"]')
+   return cy.get('a[data-ds-component="DS-NewAdCard-Link"]')
       .should("have.attr", "href")
       .and("include", `${pesquisa}`);
   }
 
   encontrarErroDePesquisa() {
-    cy.get("span").contains("Ops! Nenhum anúncio foi encontrado.");
+    return cy.get("span").contains("Ops! Nenhum anúncio foi encontrado.");
   }
 }
 

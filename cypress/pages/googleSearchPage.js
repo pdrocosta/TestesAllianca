@@ -1,6 +1,6 @@
 class GoogleSearchPage {
   navigate() {
-    cy.visit("https://www.google.com");
+    return cy.visit("https://www.google.com");
   }
 
   procurarTextoNaSearchBox(text) {
@@ -9,10 +9,10 @@ class GoogleSearchPage {
     return this;
   }
   encontrarPesquisa(pesquisa) {
-    cy.get("body").should("contain", `${pesquisa}`);
+    return cy.get("body").should("contain", `${pesquisa}`);
   }
   encontrarErroDePesquisa() {
-    cy.get("div").should(
+    return cy.get("div").should(
       "contain",
       "Sua pesquisa não encontrou nenhum documento correspondente"
     );
