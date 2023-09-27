@@ -1,0 +1,21 @@
+ Possiveis Testes
+
+ 1-> Testar se formulario pode ser cadastrado com informacoes a menos
+
+ -> Preencher informacoes incorretas e incompletas  e tentar fazer o envio. 
+ atraves de diferenres objeros com respectivas informacoes.  
+ checar se ha algum aviso de eero, ou se a pagina foi redirecionada para o login.  
+ caso seja redirecionado, checar na api se usuario foi cadastrado. se cadastrado retornar user.
+
+ 2 -> Testar informacoes mantidas ou nao, quando pagina e recarregada.
+
+ -> Preencher informacoes com mock, incluindo senhas. recarregar pagina, 
+ percorrer inputs e checar se informacoes dentro dos campos sao as mesas que as inputadas inicialmente, 
+ caso a senha esteja informada, estourar erro. caso outras informacoes nao estejam, estourar erro.
+ 
+ 3 -> Testar se email e cpf ja cadastrados podem ser usados pra criar novo usuario
+
+ -> Buscar na base de dados usuario mock ja registrado. inserir informacoes de cpf e email  buscados, 
+ e preencher restante com mocks, clicar em cadastro. caso redirecionado para pagina de login, estourar erro. 
+ checar na base de dados se existem dois ou mais usuarios com mesmo cpf ou email. caso houver, retorna-los. 
+ caso estoure erro na pagina de cadastro, sucesso. caso nao seja redirecionado para login, porem nao tenha erros, estourar erro no teste.

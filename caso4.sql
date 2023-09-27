@@ -1,5 +1,9 @@
 CREATE DATABASE IF NOT EXISTS caso_quatro_test;
 
+/* 
+Criacao de tabelas
+*/
+
 CREATE TABLE IF NOT EXISTS clientes(
     id SERIAL PRIMARY KEY,
     nome VARCHAR(40) NOT NULL,
@@ -18,9 +22,13 @@ CREATE TABLE IF NOT EXISTS vendas(
     data DATE NOT NULL,
     cliente_id INTEGER NOT NULL,
     vendedor_id INTEGER NOT NULL,
-    FOREIGN KEY(cliente_id) REFERENCES clientes(id)
+    FOREIGN KEY(cliente_id) REFERENCES clientes(id),
     FOREIGN KEY(vendedor_id) REFERENCES vendedores(id)
 );
+
+/* 
+Insercao de mock
+*/
 
 INSERT INTO clientes (nome, email, telefone)
 VALUES  ('alfredo', 'teste1@teste.com', '986467388'),
@@ -31,24 +39,22 @@ INSERT INTO vendedores (nome)
 VALUES  ('vendedor 1'),
         ('vendedor 2');
 
-/// ex 1
+/* ex 1 */
 
 WITH cliente_infos AS (
     SELECT id FROM clientes WHERE nome = 'alfredo')
 SELECT * FROM vendas WHERE cliente_id = (SELECT id FROM cliente_infos);
 
-// ex 2
+/* ex 2 */
 
 WITH vendedor_infos AS (
     SELECT id FROM vendedores WHERE nome = 'vendedor 1')
 SELECT * FROM vendas WHERE vendedor_id = (SELECT id FROM vendedor_infos);
 
-// ex 3
+/* ex 3 */
 
 UPDATE vendas SET valor_total = 0 WHERE cliente_id = 1;
 
-// ex 4
+/* ex 4 */
 
 DELETE FROM vendedores WHERE id = 2;
-
-//// fazer com pg e typeorm
