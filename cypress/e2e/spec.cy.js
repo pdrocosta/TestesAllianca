@@ -28,7 +28,7 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
 
 /// lista de outros exemplos de teste para este caso estao no txt desta pasta -> ./e2e/caso3.txt
 describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", () => {
-  const cartaoAllianca = new CartaoAlliancaRegisterPage();
+  const cartaoAlliancaRegisterPage = new CartaoAlliancaRegisterPage();
 
   beforeEach(() => {
     cartaoAlliancaRegisterPage.navigate();
