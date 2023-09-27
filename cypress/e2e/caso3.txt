@@ -21,3 +21,18 @@
  caso estoure erro na pagina de cadastro, sucesso. caso nao seja redirecionado para login, porem nao tenha erros, estourar erro no teste.
 
 4 -> Testar seguranca do front end, decodificando senha. 
+
+5-> testar se formulario aceita informacoes invalidas ou incompletas, email no formato errado, informacoes requeridas nao adicionadas, e verificar se mensagens de erro aparecem. 
+
+6-> verificar se formulario pede requerimentos para senha, como caracteres especiais
+
+7-> enviar email de confirmarcao para email cadastrado
+
+8-> testar login pelo backend com informacoes de login para confirmarcao
+
+9-> utilizar de captcha para seguranca 
+
+10-> testar em browsers diferentes
+
+11-> testar se logando e deslogando, login funciona corretamente
+
