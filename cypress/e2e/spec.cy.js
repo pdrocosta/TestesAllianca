@@ -36,6 +36,11 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
 
 /// lista de outros exemplos de teste para este caso estao no txt desta pasta -> ./e2e/caso3.txt
 describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", () => {
+
+  beforeEach(() => {
+    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+  });
+  
   const userInfos = {
     nome: "Pedro",
     cpf: "12345678900",
@@ -45,8 +50,23 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
     senha: "123456789",
   };
 
+    const buttons = [
+    "Logo",
+    "Início",
+    "Rede de Parceiros",
+    "Fale Conosco",
+    "Quero ser Parceiro",
+    "Nossos Produtos",
+    "Entrar",
+    "Quero meu Cartão",
+    "Trocar Plano",
+    "Endereco",
+    "Pagamento",
+    "Acesso ao Plano",
+  ];
+
   it.skip("Preenche formulario, cadastra, vai para pagina de login e confere se usuario foi criado corretamente na API", () => {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+    
 
     cy.get("#nome").type(userInfos.nome);
     cy.get("#cpf").type(userInfos.cpf);
@@ -71,23 +91,8 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
     });
   });
 
-  const buttons = [
-    "Logo",
-    "Início",
-    "Rede de Parceiros",
-    "Fale Conosco",
-    "Quero ser Parceiro",
-    "Nossos Produtos",
-    "Entrar",
-    "Quero meu Cartão",
-    "Trocar Plano",
-    "Endereco",
-    "Pagamento",
-    "Acesso ao Plano",
-  ];
 
   it.skip("Testar funcionalidade dos botões", () => {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
 
     buttons.forEach((buttonText) => {
       cy.get("button").contains(buttonText).click();
@@ -104,7 +109,7 @@ describe("Teste 1 e 2 v2", () => {
     cy.visit("https://www.google.com");
   });
 
-  it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
+  it("Faz uma pesquisa valida, e tira print da tela", () => {
     const google = new GoogleSearchPage();
 
     google.procurarTextoNaSearchBox("teclado");
@@ -114,7 +119,7 @@ describe("Teste 1 e 2 v2", () => {
     cy.screenshot();
   });
 
-  it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
+  it("Faz uma pesquisa invalida, e tira print da tela", () => {
     const google = new GoogleSearchPage();
 
     google.procurarTextoNaSearchBox("@%&^&*#@51fgsdfg");
