@@ -5,7 +5,7 @@ class OlxHomePage {
 
   procurarTextoNaSearchBox(text) {
     cy.get("#oraculo-4-input").type(text);
-    cy.get("form").submit();
+    cy.enviarFormulario()
     return this;
   }
 

@@ -5,7 +5,7 @@ class GoogleSearchPage {
 
   procurarTextoNaSearchBox(text) {
     cy.get("textarea[name='q']").type(text);
-    cy.get("form").submit();
+    cy.enviarFormulario()
     return this;
   }
   encontrarPesquisa(pesquisa) {

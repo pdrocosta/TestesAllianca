@@ -50,8 +50,8 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
 
   it.skip("Preenche formulario, cadastra, vai para pagina de login e confere se usuario foi criado corretamente na API", () => {
     cartaoAlliancaRegisterPage.preencherFormulario();
-    cartaoAlliancaRegisterPage.submitForm();
-    cartaoAlliancaRegisterPage.confirmarUrl("login");
+    cy.submitForm();
+    cy.confirmarUrl("login");
     cartaoAlliancaRegisterPage.checarRegistroBackEnd();
   });
 

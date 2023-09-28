@@ -13,17 +13,11 @@ class CartaoAlliancaRegisterPage {
     return this;
   }
 
-  submitForm() {
-    return cy.get('button[type="submit"]').click();
-  }
   encontrarAlertaDeCadastroRealizado() {
     return cy
       .get("#alerta-sucesso")
       .should("be.visible")
       .should("contain.text", "Cadastro realizado!");
-  }
-  confirmarUrl(param) {
-    return cy.url().should("eq", `https://www.CartaoAlianca.com.br/${param}`);
   }
 
   checarRegistroBackEnd() {
@@ -41,10 +35,10 @@ class CartaoAlliancaRegisterPage {
   }
   clicarBotaoDeRedirecionamento(text) {
     cy.get("button").contains(text).click();
-    }
-    
-    checarUrlRedirecionada(text) {
-        const urlText = text.replace(/\s+/g, "");
-        cy.url().should("eq", `https://www.CartaoAlianca.com.br/${urlText}`);  
-    }
+  }
+
+  checarUrlRedirecionada(text) {
+    const urlText = text.replace(/\s+/g, "");
+    cy.confirmarUrl(urlText);
+  }
 }
