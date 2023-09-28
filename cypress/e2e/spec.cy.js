@@ -28,10 +28,10 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
 
 /// lista de outros exemplos de teste para este caso estao no txt desta pasta -> ./e2e/caso3.txt
 describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", () => {
-  const cartaoAlliancaRegisterPage = new CartaoAlliancaRegisterPage();
+  const registerPage = new CartaoAlliancaRegisterPage();
 
   beforeEach(() => {
-    cartaoAlliancaRegisterPage.navigate();
+    registerPage.navigate();
   });
 
   const buttons = [
@@ -49,16 +49,16 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
   ];
 
   it.skip("Preenche formulario, cadastra, vai para pagina de login e confere se usuario foi criado corretamente na API", () => {
-    cartaoAlliancaRegisterPage.preencherFormulario();
+    registerPage.preencherFormulario();
     cy.submitForm();
     cy.confirmarUrl("login");
-    cartaoAlliancaRegisterPage.checarRegistroBackEnd();
+    registerPage.checarRegistroBackEnd();
   });
 
   it.skip("Testar funcionalidade dos botões", () => {
     buttons.forEach((buttonText) => {
-      cartaoAlliancaRegisterPage.clicarBotaoDeRedirecionamento(buttonText);
-      cartaoAlliancaRegisterPage.checarUrlRedirecionada(buttonText);
+      registerPage.clicarBotaoDeRedirecionamento(buttonText);
+      registerPage.checarUrlRedirecionada(buttonText);
       cy.go("back");
     });
   });
@@ -67,21 +67,21 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
 /// Caso 1 e 2 v2 ->
 
 describe("Teste 1 e 2 v2", () => {
-  const google = new GoogleSearchPage();
+  const g = new GoogleSearchPage();
 
   beforeEach(() => {
-    google.navigate();
+    g.navigate();
   });
 
   it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
-    google.procurarTextoNaSearchBox("teclado");
-    google.encontrarPesquisa("teclado");
+    g.procurarTextoNaSearchBox("teclado");
+    g.encontrarPesquisa("teclado");
     cy.screenshot();
   });
 
   it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
-    google.procurarTextoNaSearchBox("@%&^&*#@51fgsdfg");
-    google.encontrarErroDePesquisa();
+    g.procurarTextoNaSearchBox("@%&^&*#@51fgsdfg");
+    g.encontrarErroDePesquisa();
 
     cy.screenshot();
   });

@@ -1,29 +1,31 @@
 class CartaoAlliancaRegisterPage {
+  urlAllianca = "https://www.CartaoAlianca.com.br/Cadastro";
+  inptConfSenha = "#confirmarSenha";
+  divAlertSucc = "#alerta-sucesso";
+  txtSucc = "Cadastro realizado!";
+  userJson = "userInfos.json";
+
   navigate() {
-    cy.visit("https://www.CartaoAlianca.com.br/Cadastro");
+    cy.visit(urlAllianca);
   }
   preencherFormulario() {
-    cy.fixture("userInfos.json").then((userInfos) => {
-      Object.keys(userInfos).forEach((key) => {
-        cy.get(`#${key}`).type(userInfos[key]);
+    cy.fixture(userJson).then((user) => {
+      Object.keys(user).forEach((key) => {
+        cy.get(`#${key}`).type(user[key]);
       });
 
-      cy.get("#confirmarSenha").type(userInfos.senha);
+      cy.get(inptConfSenha).type(user.senha);
     });
-    return this;
   }
 
   encontrarAlertaDeCadastroRealizado() {
-    return cy
-      .get("#alerta-sucesso")
-      .should("be.visible")
-      .should("contain.text", "Cadastro realizado!");
+    cy.get(divAlertSucc).should("be.visible").should("contain.text", txtSucc);
   }
 
   checarRegistroBackEnd() {
-    return cy.request("GET", "/api/users").then((response) => {
+    cy.request("GET", "/api/users").then((response) => {
       const users = response.body;
-      cy.fixture("userInfos.json").then((userInfos) => {
+      cy.fixture(userJson).then((userInfos) => {
         const user = users.find((u) => u.cpf === userInfos.cpf);
 
         expect(user.nascimento).to.equal(userInfos.nascimento);

@@ -1,27 +1,31 @@
 class OlxHomePage {
+  urlOlx = "https://www.olx.com.br";
+  srchBox = "#oraculo-4-input";
+  cookieBtn = "#cookie-notice-ok-button";
+  cardResult = 'a[data-ds-component="DS-NewAdCard-Link"]';
+  txtInvalid = "Ops! Nenhum anúncio foi encontrado.";
+
   navigate() {
-    return cy.visit("https://www.olx.com.br");
+    cy.visit(urlOlx);
   }
 
   procurarTextoNaSearchBox(text) {
-    cy.get("#oraculo-4-input").type(text);
-    cy.enviarFormulario()
-    return this;
+    cy.get(srchBox).type(text);
+    cy.enviarFormulario();
   }
 
   aceitarCookies() {
-    return cy.get("#cookie-notice-ok-button").click();
-    
+    cy.get(cookieBtn).click();
   }
 
   encontrarPesquisaValida(pesquisa) {
-   return cy.get('a[data-ds-component="DS-NewAdCard-Link"]')
+    cy.get(cardResult)
       .should("have.attr", "href")
       .and("include", `${pesquisa}`);
   }
 
   encontrarErroDePesquisa() {
-    return cy.get("span").contains("Ops! Nenhum anúncio foi encontrado.");
+    cy.get("span").contains(txtInvalid);
   }
 }
 
