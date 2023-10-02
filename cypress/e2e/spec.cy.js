@@ -12,13 +12,13 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
     olx.aceitarCookies();
   });
 
-  it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
+  it("Faz uma pesquisa valida, e tira print da tela", () => {
     olx.procurarTextoNaSearchBox("teclado gamer");
     olx.encontrarPesquisaValida("teclado gamer");
     cy.screenshot();
   });
 
-  it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
+  it("Faz uma pesquisa invalida, e tira print da tela", () => {
     olx.procurarTextoNaSearchBox("!!!!##&*&%");
     olx.encontrarErroDePesquisa();
     cy.screenshot();

@@ -1,5 +1,5 @@
 class OlxHomePage {
-  urlOlx = "https://www.olx.com.br";
+  urlOlx = "https://www.olx.com.br/";
   srchBox = "#oraculo-4-input";
   cookieBtn = "#cookie-notice-ok-button";
   cardResult = 'a[data-ds-component="DS-NewAdCard-Link"]';
@@ -19,9 +19,8 @@ class OlxHomePage {
   }
 
   encontrarPesquisaValida(pesquisa) {
-    cy.get(this.cardResult)
-      .should("have.attr", "href")
-      ///.and("include", `${pesquisa}`);
+    cy.get(this.cardResult).should("have.attr", "href");
+    ///.and("include", `${pesquisa}`);
   }
 
   encontrarErroDePesquisa() {

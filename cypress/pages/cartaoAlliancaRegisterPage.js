@@ -1,6 +1,6 @@
 class CartaoAlliancaRegisterPage {
   /// Constantes utilizadas
-  urlAllianca = "https://www.CartaoAlianca.com.br/Cadastro";
+  urlAlliancaCadastro = "https://www.CartaoAlianca.com.br/";
   inptConfSenha = "#confirmarSenha";
   divAlertSucc = "#alerta-sucesso";
   txtSucc = "Cadastro realizado!";
@@ -8,7 +8,7 @@ class CartaoAlliancaRegisterPage {
 
   /// Visit para url fixa
   navigate() {
-    cy.visit(this.urlAllianca);
+    cy.visit(`${this.urlAlliancaCadastro}Cadastro`);
   }
 
   /// Funcao para buscar os dados de mock em fixture, percorre-los, encontrar as keys, percorre-las, encontrando os inputs correspondentes, e escrever
@@ -31,7 +31,8 @@ class CartaoAlliancaRegisterPage {
 
   /// Funcao mock, para simular uma busca no backend, confirmando as informacoes cadastradas no banco de dados
   checarRegistroBackEnd() {
-    cy.request("GET", "/api/users").then((response) => {
+    cy.request("GET", "/api/users").should((response) => {
+      expect(response.status).to.eq(200);
       const users = response.body;
       cy.fixture(this.userJson).then((userInfos) => {
         const user = users.find((u) => u.cpf === userInfos.cpf);
@@ -46,8 +47,8 @@ class CartaoAlliancaRegisterPage {
 
   /// Funcao que retira os espacos do texto, e busca eles na url para confirmar se esta presente
   checarUrlRedirecionada(text) {
-    const urlText = text.replace(/\s+/g, "");
-    cy.confirmarUrl(urlText);
+    const urlText = text.replace(/\s+/g, ""); /// /s para identificar o espaco, e o g para aplicar em todos, substituindo pela proxima variavel, que seria uma string vazia
+    cy.confirmarUrl(urlAlliancaCadastro + urlText);
   }
 }
 

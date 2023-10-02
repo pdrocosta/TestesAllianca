@@ -4,7 +4,7 @@ Cypress.Commands.add("enviarFormulario", () => {
 
 Cypress.Commands.add("confirmarUrl", (param) => {
   {
-    cy.url().should("eq", `https://www.CartaoAlianca.com.br/${param}`);
+    cy.url().should("eq", param);
   }
 });
 
