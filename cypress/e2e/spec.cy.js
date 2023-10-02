@@ -8,7 +8,6 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
   const olx = new OlxHomePage();
 
   beforeEach(() => {
-    /// entra no site, e aceita os cookies, antes de cada teste
     olx.navigate();
     olx.aceitarCookies();
   });

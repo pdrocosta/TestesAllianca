@@ -39,6 +39,13 @@ INSERT INTO vendedores (nome)
 VALUES  ('vendedor 1'),
         ('vendedor 2');
 
+
+INSERT INTO vendas (valor_total, data, cliente_id, vendedor_id)
+VALUES
+    (30, '2021-12-12', 1, 1),
+    (20, '2021-06-06', 1, 2),
+    (45, '2021-08-08', 3, 1);
+
 /* ex 1 -> Faça uma consulta e traga todas as vendas do cliente com nome alfredo*/
 
 WITH cliente_infos AS (
