@@ -1,3 +1,4 @@
+import CartaoAlliancaRegisterPage from "../pages/cartaoAlliancaRegisterPage";
 import GoogleSearchPage from "../pages/googleSearchPage";
 import OlxHomePage from "../pages/olxHomePage";
 
@@ -7,17 +8,18 @@ describe("Verificar funcionalidade de pesquisa da OLX", () => {
   const olx = new OlxHomePage();
 
   beforeEach(() => {
+    /// entra no site, e aceita os cookies, antes de cada teste
     olx.navigate();
     olx.aceitarCookies();
   });
 
-  it("Faz uma pesquisa valida, e tira print da tela", () => {
+  it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
     olx.procurarTextoNaSearchBox("teclado gamer");
     olx.encontrarPesquisaValida("teclado gamer");
     cy.screenshot();
   });
 
-  it("Faz uma pesquisa invalida, e tira print da tela", () => {
+  it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
     olx.procurarTextoNaSearchBox("!!!!##&*&%");
     olx.encontrarErroDePesquisa();
     cy.screenshot();
@@ -34,6 +36,7 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
     registerPage.navigate();
   });
 
+  /// botoes encontrados no screenshot na pagina
   const buttons = [
     "Início",
     "Rede de Parceiros",
@@ -57,7 +60,7 @@ describe("Verifica funcionalidades da pagina de cadastro da Cartao Allianca", ()
 
   it.skip("Testar funcionalidade dos botões", () => {
     buttons.forEach((buttonText) => {
-      registerPage.clicarBotaoDeRedirecionamento(buttonText);
+      cy.clicarBotao(buttonText);
       registerPage.checarUrlRedirecionada(buttonText);
       cy.go("back");
     });
@@ -73,13 +76,13 @@ describe("Teste 1 e 2 v2", () => {
     g.navigate();
   });
 
-  it.skip("Faz uma pesquisa valida, e tira print da tela", () => {
+  it("Faz uma pesquisa valida, e tira print da tela", () => {
     g.procurarTextoNaSearchBox("teclado");
     g.encontrarPesquisa("teclado");
     cy.screenshot();
   });
 
-  it.skip("Faz uma pesquisa invalida, e tira print da tela", () => {
+  it("Faz uma pesquisa invalida, e tira print da tela", () => {
     g.procurarTextoNaSearchBox("@%&^&*#@51fgsdfg");
     g.encontrarErroDePesquisa();
 

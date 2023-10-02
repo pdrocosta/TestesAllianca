@@ -39,22 +39,22 @@ INSERT INTO vendedores (nome)
 VALUES  ('vendedor 1'),
         ('vendedor 2');
 
-/* ex 1 */
+/* ex 1 -> Faça uma consulta e traga todas as vendas do cliente com nome alfredo*/
 
 WITH cliente_infos AS (
     SELECT id FROM clientes WHERE nome = 'alfredo')
 SELECT * FROM vendas WHERE cliente_id = (SELECT id FROM cliente_infos);
 
-/* ex 2 */
+/* ex 2 -> Faça uma consulta e traga todas as vendas do vendedor 1*/
 
 WITH vendedor_infos AS (
     SELECT id FROM vendedores WHERE nome = 'vendedor 1')
 SELECT * FROM vendas WHERE vendedor_id = (SELECT id FROM vendedor_infos);
 
-/* ex 3 */
+/* ex 3 -> Atualize todas as vendas do do cliente com o id 1 */
 
 UPDATE vendas SET valor_total = 0 WHERE cliente_id = 1;
 
-/* ex 4 */
+/* ex 4 -> Exclua os dados do vendedor com id 2 */
 
 DELETE FROM vendedores WHERE id = 2;

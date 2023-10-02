@@ -4,18 +4,18 @@ class GoogleSearchPage {
   txtErr = "Sua pesquisa não encontrou nenhum documento correspondente";
 
   navigate() {
-    return cy.visit(urlG);
+    return cy.visit(this.urlG);
   }
 
   procurarTextoNaSearchBox(text) {
-    cy.get(srchBox).type(text);
+    cy.get(this.srchBox).type(text);
     cy.enviarFormulario();
   }
   encontrarPesquisa(pesquisa) {
     cy.get("body").should("contain", `${pesquisa}`);
   }
   encontrarErroDePesquisa() {
-    cy.get("div").should("contain", txtErr);
+    cy.get("div").should("contain", this.txtErr);
   }
 }
 

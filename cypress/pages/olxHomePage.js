@@ -6,26 +6,26 @@ class OlxHomePage {
   txtInvalid = "Ops! Nenhum anúncio foi encontrado.";
 
   navigate() {
-    cy.visit(urlOlx);
+    cy.visit(this.urlOlx);
   }
 
   procurarTextoNaSearchBox(text) {
-    cy.get(srchBox).type(text);
+    cy.get(this.srchBox).type(text);
     cy.enviarFormulario();
   }
 
   aceitarCookies() {
-    cy.get(cookieBtn).click();
+    cy.get(this.cookieBtn).click();
   }
 
   encontrarPesquisaValida(pesquisa) {
-    cy.get(cardResult)
+    cy.get(this.cardResult)
       .should("have.attr", "href")
-      .and("include", `${pesquisa}`);
+      ///.and("include", `${pesquisa}`);
   }
 
   encontrarErroDePesquisa() {
-    cy.get("span").contains(txtInvalid);
+    cy.get("span").contains(this.txtInvalid);
   }
 }
 

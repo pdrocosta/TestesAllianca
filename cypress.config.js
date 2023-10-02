@@ -1,9 +1,9 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: 'viu9nk',
+  projectId: "viu9nk",
   e2e: {
     watchForFileChanges: false,
-    },
   },
-);
+  supportFolder: "/support",
+});
